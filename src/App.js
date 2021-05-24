@@ -7,6 +7,8 @@ import Cart from './components/Cart';
 import styled from 'styled-components';
 import Men from './components/Shop/Men';
 import Women from './components/Shop/Women';
+import './normalize.css';
+import './style.css';
 
 const Container = styled.div`
   min-height: 100vh;
