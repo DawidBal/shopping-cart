@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import ButtonLink from './Utilities/ButtonLink'
+import BackgroundImage from '../images/shopbg.jpg';
 
 const Main = styled.main`
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-    background: url('./images/shopbg.jpg');
+    background: url(${BackgroundImage});
     background-repeat: no-repeat;
     background-size: cover;
 `
@@ -23,15 +24,11 @@ const Title = styled.h2`
     font-size: 3rem;
     color: #fff;
     font-weight: 800;
-    margin: 0;
-    padding: 0;
 `
 const SubTitle = styled.p`
     font-size: 1rem;
     color: #fff;
     font-weight: 400;
-    margin: 0;
-    padding: 0;
 `
 
 const Home = () => {

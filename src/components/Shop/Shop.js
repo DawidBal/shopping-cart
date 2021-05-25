@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import ButtonLink from '../Utilities/ButtonLink';
+import ManImage from '../../images/men.jpg'
+import WomanImage from '../../images/women.jpg'
 
 const Main = styled.main`
     display: grid;
@@ -14,7 +16,7 @@ const Title = styled.h2`
     padding: 0;
     grid-column: 1 / -1;
     text-align: center;
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 1.5rem + 1vw, 3rem);
     font-weight: 800;
     
 `
@@ -26,8 +28,8 @@ const ImageSection = styled.div`
     align-items: center;
     justify-content: center;
     gap: 3rem;
-    background: ${props => props.men ? 'url(./images/men.jpg)' : 'url(./images/women.jpg)'};
-    background-position: right;
+    background: ${props => props.men ? `url(${ManImage})` : `url(${WomanImage})`};
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
