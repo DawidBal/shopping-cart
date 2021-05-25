@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
@@ -18,8 +18,12 @@ const Container = styled.div`
 
 function App() {
 
-  const [cartCounter, setCartCounter] = useState(0)
+  const [cartCounter, setCartCounter] = useState(0);
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    setCartCounter(cartItems.length);
+  }, [cartItems]);
 
   return (
     <Router>
@@ -29,8 +33,12 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route path="/cart" component={Cart} />
               <Route exact path="/shop" component={Shop} />
-              <Route path="/shop/men" component={Men} />
-              <Route path="/shop/women" component={Women} />
+              <Route path="/shop/men">
+                <Men cartItems={cartItems} setCartItems={setCartItems}/>
+              </Route>
+              <Route path="/shop/women" >
+                <Women cartItems={cartItems} setCartItems={setCartItems} />
+              </Route>
             </Switch>
       </Container>
     </Router >
