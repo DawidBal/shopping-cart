@@ -22,8 +22,6 @@ const Wrapper = styled.div`
 `
 
 const Logo = styled.h1`
-    margin: 0;
-    padding: 0;
     font-size: 2.5rem;
 `
 const CartCounter = styled.span`
@@ -42,6 +40,27 @@ const CartCounter = styled.span`
     
 `
 
+const StyledNavLink = styled(NavLink)`
+    font-size: 1.2rem;
+    position: relative;
+    &::before {
+        content: '';
+        width: 0;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        height: 0.1em;
+        background: currentColor;
+        transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &:hover&::before{
+        left: 0;
+        right: auto;
+        width: 100%;
+    }
+`
+
 const Header = ({ cartCounter }) => {
     return (
         <Heading>
@@ -53,7 +72,7 @@ const Header = ({ cartCounter }) => {
                         </Logo>
                     </li>
                     <li>
-                        <NavLink to="/shop">Shop</NavLink>
+                        <StyledNavLink to="/shop">Shop</StyledNavLink>
                     </li>
                 </Wrapper>
                 <li style={{position: 'relative'}}>
