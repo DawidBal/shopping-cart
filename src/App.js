@@ -3,7 +3,7 @@ import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import Shop from './components/Shop/Shop.js';
-import Cart from './components/Cart';
+import Cart from './components/Cart/Cart';
 import styled from 'styled-components';
 import Men from './components/Shop/Men';
 import Women from './components/Shop/Women';
@@ -31,7 +31,9 @@ function App() {
         <Header cartCounter={cartCounter} />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/cart" component={Cart} />
+              <Route path="/cart">
+                <Cart cartItems={cartItems} />
+              </Route>
               <Route exact path="/shop" component={Shop} />
               <Route path="/shop/men">
                 <Men cartItems={cartItems} setCartItems={setCartItems}/>
