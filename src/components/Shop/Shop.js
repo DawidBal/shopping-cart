@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
 import ButtonLink from '../Utilities/ButtonLink';
 import ManImage from '../../images/men.jpg'
 import WomanImage from '../../images/women.jpg'
