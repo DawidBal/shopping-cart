@@ -40,16 +40,26 @@ const Product = ({ data, cartItems, setCartItems }) => {
     const [size, setSize] = useState(null);
     const [badSize, setBadSize] = useState(false);
 
-    const handleSize = ({value: size}) => {
+    const handleSize = ( {value: size} ) => {
         setBadSize(false);
-        setSize(size)
+        setSize(size);
     };
+    
+    const getItemCartIndex = (productData) => cartItems.findIndex(item => item.id === productData.id && item.size === productData.size);
 
+    const isItemInCart = (productData) => getItemCartIndex(productData) !== -1
 
-    // TODO Refactor function
+    const increaseItemQuantity = (productData) => {
+        const itemIndex = getItemCartIndex(productData);
+        const itemData = { ...cartItems[itemIndex], quantity: cartItems[itemIndex].quantity + 1 };
+        const newCartData = [...cartItems];
+        newCartData.splice(itemIndex, 1, itemData);
+        setCartItems(newCartData);
+    }
+
     const addToCart = () => {
         if(size === null) {
-            setBadSize(true);;
+            setBadSize(true);
             return
         }
 
@@ -61,9 +71,12 @@ const Product = ({ data, cartItems, setCartItems }) => {
             size,
             quantity: 1,
         }
-
-        setCartItems(cartItems.concat(productData));
-
+        
+        if(isItemInCart(productData)) {
+            increaseItemQuantity(productData);
+        } else {
+            setCartItems(cartItems.concat(productData));
+        }
     }
 
     return (
