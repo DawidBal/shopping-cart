@@ -65,6 +65,7 @@ const TotalAmount = styled.span`
 const Cart = ({ cartItems, setCartItems } ) => {
 
     const [orderValue, setOrderValue] = useState(0.00);
+    const [deliveryValue, setDeliveryValue] = useState(0.00);
     const [isDeliveryFree, setIsDeliveryFree] = useState(false);
     const freeDeliveryValue = 199.99;
 
@@ -73,10 +74,12 @@ const Cart = ({ cartItems, setCartItems } ) => {
     const calculateOrderValue = () => {
         setOrderValue(cartItems.length > 0 ? cartItems.reduce((sum, item) => {
             return +(sum += item.price * item.quantity).toFixed(2);
-        }, 0) : 0.00)
+        }, 0) : 0)
     }
 
-    const calculateTotalValue = () => isDeliveryFree ? `${orderValue}$` : `${orderValue + 9.99}$`;
+    const calculateTotalValue = () => isDeliveryFree ? `${orderValue}$` : `${orderValue + deliveryValue}$`;
+
+    const calculateDelivery = () => cartItems.length > 0 && !isDeliveryFree ? setDeliveryValue(9.99) : setDeliveryValue(0.00);
     
     useEffect(() => {
         calculateOrderValue();
@@ -85,6 +88,10 @@ const Cart = ({ cartItems, setCartItems } ) => {
     useEffect(() => {
         checkDelivery();
     }, [orderValue])
+
+    useEffect(() => {
+        calculateDelivery()
+    }, [isDeliveryFree, cartItems])
 
     return (
         <Main>
