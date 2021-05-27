@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Select from 'react-select';
+import Button from '../Utilities/Button';
 
 const Product = styled.li`
     display: grid;
@@ -17,6 +18,22 @@ const Image = styled.img`
     object-fit: cover;
     max-width: 100px;
     max-height: 150px;
+`
+
+const FlexColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    gap: 0.3rem;
+`
+
+const Wrapper = styled.div`
+    display: grid;
+    grid-template-columns: 1fr auto;
+`
+
+const IconContainer = styled.div`
+    align-self: flex-start;
 `
 
 const options = [
@@ -42,20 +59,33 @@ const options = [
     { value: 20, label: 20 },
 ]
 
-const CartProduct = ({ data }) => {
+const CartProduct = ({ data, cartItems, setCartItems, itemIndex }) => {
     
     
     const [quantity, setQuantity] = useState(data.quantity);
     const calculateTotalPrice = () => (data.price * quantity).toFixed(2) + "$";
     const [totalPrice, setTotalPrice] = useState(calculateTotalPrice());
 
-
     const handleChange = ({value}) => {
         setQuantity(value);
     }
 
+    const updateItemQuantity = () => {
+        const itemData = { ...cartItems[itemIndex], quantity };
+        const newCartData = [...cartItems];
+        newCartData.splice(itemIndex, 1, itemData);
+        setCartItems(newCartData);
+    }
+
+    const removeItem = () => {
+        const newCartData = [...cartItems];
+        newCartData.splice(itemIndex, 1);
+        setCartItems(newCartData);
+    }
+
     useEffect(() => {
         setTotalPrice(calculateTotalPrice());
+        updateItemQuantity();
     }, [quantity])
 
     return (
@@ -65,18 +95,29 @@ const CartProduct = ({ data }) => {
             {data.title}
             <p>Size: {data.size}</p>
             </div>
-            <div>
-                <label htmlFor={"size-" + data.id}>Quantity</label>
-                <Select
-                    styles={{
-                        control: (provided) => ({
-                            ...provided,
-                            width: 100,
-                        }),
-                    }}
-                    id={"size-" + data.id} defaultValue={options[quantity - 1]} options={options} onChange={handleChange} />
-                <p>Total: {totalPrice}</p>
-            </div>
+            <Wrapper>
+                <FlexColumn>
+                    <label htmlFor={"size-" + data.id}>Quantity</label>
+                    <Select
+                        styles={{
+                            control: (provided) => ({
+                                ...provided,
+                                width: 100,
+                            }),
+                            container: (provided) => ({
+                                ...provided,
+                                alignSelf: 'flex-start',
+                            })
+                        }}
+                        id={"size-" + data.id} defaultValue={options[quantity - 1]} options={options} onChange={handleChange} />
+                    <p>Total: {totalPrice}</p>
+                </FlexColumn>
+                <IconContainer>
+                    <svg onClick={removeItem} className="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z" />
+                    </svg>
+                </IconContainer>
+            </Wrapper>
         </Product>
     )
 }
