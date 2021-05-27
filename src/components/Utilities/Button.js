@@ -14,7 +14,7 @@ const Btn = styled.button`
     color: #fff;
     font-size: 1.2rem;
     background-color: transparent;
-    border: 2px solid ${props => props.cart ? '#fff' : '#0e63d8'};
+    border: 2px solid ${props => props.cart ? '#0e63d8' : '#fff'};
     z-index: 0;
     cursor: pointer;
     transition: transform 200ms ease-out;
@@ -42,9 +42,9 @@ const Btn = styled.button`
     }
 `
 
-const Button = ({ children, onClick }) => {
+const Button = ({ children, onClick, cart }) => {
     return (
-        <Btn onClick={onClick}>
+        <Btn cart={cart === true} onClick={onClick}>
             {children}
         </Btn>
     )
