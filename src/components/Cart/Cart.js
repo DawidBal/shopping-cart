@@ -4,11 +4,7 @@ import Button from '../Utilities/Button'
 import CartProduct from './CartProduct'
 
 const Title = styled.h2`
-    margin-top: 1rem;
-    padding: 0;
-    grid-column: 1 / -1;
     text-align: center;
-    font-size: clamp(1.5rem, 1.5rem + 1vw, 3rem);
     font-weight: 800;
 `
 
@@ -27,12 +23,43 @@ const Wrapper = styled.ul`
 `
 
 const Summary = styled.aside`
-    padding: 1rem 2rem;
+    padding: 1rem 3rem;
     display: flex;
     gap: 1rem;
     flex-direction: column;
-    align-items: center;
     background: #f0f0f0;
+`
+
+const MainTitle = styled(Title)`
+    margin-top: 1rem;
+    grid-column: 1 / -1;
+    font-size: clamp(1.5rem, 1.5rem + 1vw, 3rem);
+
+`
+
+const SummaryTitle = styled(Title)`
+    font-size: clamp(1.5rem, 1.5rem + 1vw, 2.5rem);
+`
+
+const OrderValueWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+`
+
+const OrderValues = styled.div`
+    display: grid;
+    grid-template-columns: 1fr auto;
+    font-size: 1.2rem;
+`
+
+const Total = styled(OrderValues)`
+    padding-top: 0.5rem;
+    border-top: 1px solid #ccc;
+    `
+const TotalAmount = styled.span`
+    font-size: 1.5rem;
+    font-weight: 600;
 `
 
 const Cart = ({ cartItems, setCartItems } ) => {
@@ -61,21 +88,29 @@ const Cart = ({ cartItems, setCartItems } ) => {
 
     return (
         <Main>
-            <Title>Cart</Title>
+            <MainTitle>Cart</MainTitle>
             <Wrapper>
                 {cartItems.map((item, index) => 
                     <CartProduct key={item.id + item.size} data={item} cartItems={cartItems} itemIndex={index} setCartItems={setCartItems}/>
                     )}
             </Wrapper>
             <Summary>
-                <h2>Summary</h2>
-                <div>
-                    <div>
-                        <p>{`Order value: ${orderValue}$`}</p>
-                        <p>Delivery: </p>
-                    </div>
-                    <p>Total: { calculateTotalValue() }</p>
-                </div>
+                <SummaryTitle>Summary</SummaryTitle>
+                <OrderValueWrapper>
+                    <OrderValues>
+                        <span>Order value: </span>
+                        <span>{`${orderValue}$`}</span>
+                    </OrderValues>
+                    <OrderValues>
+                        <span>Delivery: </span>
+                        <span>{`${deliveryValue}$`}</span>
+                    </OrderValues>
+                    
+                    <Total>
+                        <span>Total: </span>
+                        <TotalAmount>{calculateTotalValue()}</TotalAmount>
+                    </Total>
+                </OrderValueWrapper>
                 <Button cart>Checkout</Button>
             </Summary>
         </Main>
