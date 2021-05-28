@@ -14,7 +14,7 @@ const Btn = styled.button`
     color: #fff;
     font-size: 1.2rem;
     background-color: transparent;
-    border: 2px solid ${props => props.cart ? '#0e63d8' : '#fff'};
+    border: 2px solid ${props => props.cart ? 'var(--main-color)' : '#fff'};
     z-index: 0;
     cursor: pointer;
     transition: transform 200ms ease-out;
@@ -27,9 +27,8 @@ const Btn = styled.button`
         width: 100%;
         height: 100%;
         z-index: -1;
-        background-color: #0e63d8;
-        transition: all 200ms ease-out;
-        
+        background-color: var(--main-color);
+        transition: all 200ms ease-out; 
     }
 
     &:active {

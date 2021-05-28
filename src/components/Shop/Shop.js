@@ -51,7 +51,7 @@ const Overlay = styled.div`
 
 const CollectionTitle = styled(Title)`
     transition: color 0.3s ease;
-    color: #0e63d8;
+    color: var(--main-color);
     z-index: 0;
 `
 

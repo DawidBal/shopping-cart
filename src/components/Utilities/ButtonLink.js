@@ -28,7 +28,7 @@ const Links = styled(Link)`
         width: 100%;
         height: 100%;
         z-index: -1;
-        background-color: #0e63d8;
+        background-color: var(--main-color);
         transition: all 200ms ease-out;
         
     }

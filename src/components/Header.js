@@ -36,7 +36,7 @@ const CartCounter = styled.span`
     border-radius: 500px;
     color: white;
     text-align: center;
-    background: #0c7fd0;
+    background: var(--main-color);
     
 `
 
