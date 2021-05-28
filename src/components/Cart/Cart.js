@@ -77,7 +77,7 @@ const Cart = ({ cartItems, setCartItems } ) => {
         }, 0) : 0)
     }
 
-    const calculateTotalValue = () => isDeliveryFree ? `${orderValue}$` : `${orderValue + deliveryValue}$`;
+    const calculateTotalValue = () => isDeliveryFree ? `${orderValue}$` : `${Math.round((orderValue + deliveryValue) * 100) / 100}$`;
 
     const calculateDelivery = () => cartItems.length > 0 && !isDeliveryFree ? setDeliveryValue(9.99) : setDeliveryValue(0.00);
     
