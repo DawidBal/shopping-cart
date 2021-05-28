@@ -6,6 +6,7 @@ import BackgroundImage from '../images/shopbg.jpg';
 const Main = styled.main`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1rem;
     padding: 1rem;
     background: url(${BackgroundImage});
@@ -23,6 +24,7 @@ const Wrapper = styled.div`
 const Title = styled.h2`
     font-size: 3rem;
     color: #fff;
+    text-align: center;
     font-weight: 800;
 `
 const SubTitle = styled.p`
@@ -31,12 +33,17 @@ const SubTitle = styled.p`
     font-weight: 400;
 `
 
+const ColorText = styled.span`
+    color: var(--main-color);
+`
+
 const Home = () => {
     return (
         <Main>
             <Wrapper column>
-                <Title>Cuz u have to wear something</Title>
-                <SubTitle>Isn't it?</SubTitle>
+                <Title>Because you have to <ColorText>wear some</ColorText>thing</Title>
+                <SubTitle>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam, perspiciatis?
+                </SubTitle>
             </Wrapper>
             <Wrapper links>
                 <ButtonLink to="/shop">Visit Shop</ButtonLink>
