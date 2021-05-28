@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Select from 'react-select';
-import Button from '../Utilities/Button';
+import { Link } from 'react-router-dom';
 
 const Product = styled.li`
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.5rem;
+    grid-template-rows: 1fr auto;
+    gap: 1rem;
     align-items: center;
     padding: 1rem;
     box-shadow: 0 2px 5px #0000002a;
@@ -34,6 +34,16 @@ const Wrapper = styled.div`
 
 const IconContainer = styled.div`
     align-self: flex-start;
+`
+
+const ProductTitle = styled.p`
+    font-size: 1.2rem;
+    color: var(--main-color);
+    font-weight: 500;
+`
+
+const StyledLink = styled(Link)`
+    grid-row: 1 / -1;
 `
 
 const options = [
@@ -70,6 +80,8 @@ const CartProduct = ({ data, cartItems, setCartItems, itemIndex }) => {
         setQuantity(value);
     }
 
+    const linkTitle = data.title.toLowerCase().split(" ").join("-");
+
     const updateItemQuantity = () => {
         const itemData = { ...cartItems[itemIndex], quantity };
         const newCartData = [...cartItems];
@@ -90,9 +102,14 @@ const CartProduct = ({ data, cartItems, setCartItems, itemIndex }) => {
 
     return (
         <Product>
-            <Image src={data.image} alt="" />
+            <StyledLink to={{
+                pathname: `/shop/${data.collection}/${linkTitle}`,
+                state: data.id
+            }}>
+                <Image src={data.image} alt="" />
+            </StyledLink>
             <div>
-            {data.title}
+            <ProductTitle>{data.title}</ProductTitle>
             <p>Size: {data.size}</p>
             </div>
             <Wrapper>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import Button from '../Utilities/Button';
 import Select from 'react-select';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const Item = styled.div`
     display: grid;
@@ -16,6 +17,10 @@ const Image = styled.img`
     object-fit: cover;
     max-width: 250px;
     max-height: 270px;
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: scale(1.05);
+    }
 `
 
 const Title = styled.h2`
@@ -35,7 +40,11 @@ const options = [
     { value: 'XL', label: "XL"},
 ]
 
-const Product = ({ data, cartItems, setCartItems }) => {
+const Product = ({ data, cartItems, setCartItems, collection }) => {
+
+    const match = useRouteMatch();
+
+    const linkTitle = data.title.toLowerCase().split(" ").join("-");
 
     const [size, setSize] = useState(null);
     const [badSize, setBadSize] = useState(false);
@@ -68,6 +77,7 @@ const Product = ({ data, cartItems, setCartItems }) => {
             title: data.title,
             price: data.price,
             image: data.image,
+            collection,
             size,
             quantity: 1,
         }
@@ -81,8 +91,18 @@ const Product = ({ data, cartItems, setCartItems }) => {
 
     return (
         <Item>
-            <Image src={data.image} alt="" />
-            <Title>{data.title}</Title>
+            <Link to={{
+                pathname: `${match.url}/${linkTitle}`,
+                state: data.id
+            }}>
+                <Image src={data.image} alt="" />
+            </Link>
+            <Link to={{
+                pathname: `${match.url}/${linkTitle}`,
+                state: data.id
+            }}>
+                <Title>{data.title}</Title>
+            </Link>
             <Price>{data.price}$</Price>
             <label htmlFor={"size-" + data.id}>Size</label>
             <Select 

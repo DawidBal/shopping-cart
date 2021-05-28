@@ -9,6 +9,7 @@ import Men from './components/Shop/Men';
 import Women from './components/Shop/Women';
 import './normalize.css';
 import './style.css';
+import ProductDetail from './components/Shop/ProductDetail';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -29,19 +30,31 @@ function App() {
     <Router>
       <Container className="App">
         <Header cartCounter={cartCounter} />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/cart">
+        <Switch>
+          <Route exact path="/" component={Home} />
+
+          <Route path="/cart">
             <Cart cartItems={cartItems} setCartItems={setCartItems} />
-              </Route>
-              <Route exact path="/shop" component={Shop} />
-              <Route path="/shop/men">
-                <Men cartItems={cartItems} setCartItems={setCartItems}/>
-              </Route>
-              <Route path="/shop/women" >
-                <Women cartItems={cartItems} setCartItems={setCartItems} />
-              </Route>
-            </Switch>
+          </Route>
+
+          <Route exact path="/shop" component={Shop} />
+
+          <Route exact path="/shop/men">
+            <Men cartItems={cartItems} setCartItems={setCartItems}/>
+          </Route>
+
+          <Route path="/shop/men/:id">
+            <ProductDetail cartItems={cartItems} setCartItems={setCartItems}/>
+          </Route>
+
+          <Route exact path="/shop/women" >
+            <Women cartItems={cartItems} setCartItems={setCartItems} />
+          </Route>
+
+          <Route path="/shop/women/:id">
+            <ProductDetail cartItems={cartItems} setCartItems={setCartItems} />
+          </Route>
+        </Switch>
       </Container>
     </Router >
   );

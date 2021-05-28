@@ -25,7 +25,12 @@ const Wrapper = styled.div`
     margin: 1.5rem;
 `
 
-const Collection = ({ title, url, cartItems, setCartItems}) => {
+const Loading = styled.h2`
+    grid-column: 1 / -1;
+    justify-self: center;
+`
+
+const Collection = ({ title, url, cartItems, setCartItems, collection}) => {
 
     const [loading, data] = useFetchData(url);
 
@@ -34,8 +39,8 @@ const Collection = ({ title, url, cartItems, setCartItems}) => {
             <Title>{title}</Title>
             <Wrapper>
                 {loading ?
-                    <h2>Loading...</h2> :
-                    data.map(prod => <Product key={prod.id} data={prod} cartItems={cartItems} setCartItems={setCartItems} />)
+                    <Loading>Loading Data...</Loading> :
+                    data.map(prod => <Product key={prod.id} data={prod} cartItems={cartItems} setCartItems={setCartItems} collection={collection} />)
                 }
             </Wrapper>
         </Main>
