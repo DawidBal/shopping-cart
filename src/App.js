@@ -27,7 +27,6 @@ function App() {
   }, [cartItems]);
 
   return (
-    <Router>
       <Container className="App">
         <Header cartCounter={cartCounter} />
         <Switch>
@@ -56,7 +55,6 @@ function App() {
           </Route>
         </Switch>
       </Container>
-    </Router >
   );
 }
 
