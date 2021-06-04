@@ -27,6 +27,10 @@ const Wrapper = styled.ul`
     margin: 1rem 2rem;
 `
 
+const TitleWrapper = styled.div`
+    grid-column: 1 / -1;
+`
+
 const Summary = styled.aside`
     padding: 1rem 3rem;
     display: flex;
@@ -37,7 +41,7 @@ const Summary = styled.aside`
 
 const MainTitle = styled(Title)`
     margin-top: 1rem;
-    grid-column: 1 / -1;
+    
     font-size: clamp(1.5rem, 1.5rem + 1vw, 3rem);
 
 `
@@ -65,6 +69,12 @@ const Total = styled(OrderValues)`
 const TotalAmount = styled.span`
     font-size: 1.5rem;
     font-weight: 600;
+`
+
+const EmptyCart = styled.p`
+    font-size: clamp(1.5rem, 1.5rem + 1vw, 2rem);
+    opacity: 0.4;
+    text-align: center;
 `
 
 const Cart = ({ cartItems, setCartItems } ) => {
@@ -98,9 +108,14 @@ const Cart = ({ cartItems, setCartItems } ) => {
         calculateDelivery()
     }, [isDeliveryFree, cartItems])
 
+    console.log(cartItems);
+
     return (
         <Main>
+            <TitleWrapper>
             <MainTitle>Cart</MainTitle>
+            {cartItems.length < 1 ? <EmptyCart>Your cart is empty</EmptyCart> : null}
+            </TitleWrapper>
             <Wrapper>
                 {cartItems.map((item, index) => 
                     <CartProduct key={item.id + item.size} data={item} cartItems={cartItems} itemIndex={index} setCartItems={setCartItems}/>
