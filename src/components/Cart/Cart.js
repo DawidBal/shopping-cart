@@ -12,6 +12,11 @@ const Main = styled.main`
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: auto 1fr;
+
+    @media only screen and (max-width: 1000px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+    }
 `
 
 const Wrapper = styled.ul`
@@ -118,7 +123,7 @@ const Cart = ({ cartItems, setCartItems } ) => {
                         <TotalAmount>{calculateTotalValue()}</TotalAmount>
                     </Total>
                 </OrderValueWrapper>
-                <Button cart>Checkout</Button>
+                <Button cart summary>Checkout</Button>
             </Summary>
         </Main>
     )

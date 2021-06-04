@@ -22,6 +22,7 @@ const Title = styled.h2`
 
 const ImageSection = styled.div`
     position: relative;
+    padding: 0 1rem;
     display: flex;
     flex-direction:column;
     align-items: center;

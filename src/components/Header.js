@@ -17,7 +17,7 @@ const LinkList = styled.ul`
 
 const Wrapper = styled.div`
     display: flex;
-    gap: 4rem;
+    gap: clamp(1rem, 1rem + 2vw, 4rem);
     align-items: center;
 `
 

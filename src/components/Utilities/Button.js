@@ -19,6 +19,10 @@ const Btn = styled.button`
     cursor: pointer;
     transition: transform 200ms ease-out;
 
+    @media only screen and (max-width: 1000px) {
+        width: ${props => props.summary ? '100%' : null}
+    }
+
     &::before {
         content: '';
         position: absolute;
@@ -41,9 +45,9 @@ const Btn = styled.button`
     }
 `
 
-const Button = ({ children, onClick, cart }) => {
+const Button = ({ children, onClick, cart, summary }) => {
     return (
-        <Btn cart={cart === true} onClick={onClick}>
+        <Btn cart={cart} summary={summary?.toString()} onClick={onClick}>
             {children}
         </Btn>
     )

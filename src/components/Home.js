@@ -4,11 +4,11 @@ import ButtonLink from './Utilities/ButtonLink'
 import BackgroundImage from '../images/shopbg.jpg';
 
 const Main = styled.main`
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    padding: 1rem;
     background: url(${BackgroundImage});
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,12 +19,13 @@ const Wrapper = styled.div`
     flex-direction : ${props => props.column ? "column" : "row"};
     ${props => props.column ? "align-items: center": "justify-content: center"};
     gap: ${props => props.links ? "1.5rem" : "0.5rem"};
+    flex-wrap: wrap;
+    text-align: center;
 `
 
 const Title = styled.h2`
     font-size: 3rem;
     color: #fff;
-    text-align: center;
     font-weight: 800;
 `
 const SubTitle = styled.p`

@@ -14,10 +14,12 @@ const Main = styled.main`
 `
 
 const Content = styled.div`
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
     margin: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 `
 
 const LeftSide = styled.div`
@@ -25,6 +27,7 @@ const LeftSide = styled.div`
 `
 
 const RightSide = styled.div`
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
